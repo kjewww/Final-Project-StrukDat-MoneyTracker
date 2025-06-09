@@ -14,5 +14,13 @@ namespace MoneyTracker
         private string _description;
         private Category _category;
 
+        public Record(string title, DateTime date, decimal amount, string description, Category category)
+        {
+            _title = title;
+            _date = date;
+            _amount = amount;
+            _description = description;
+            _category = category;
+        }
     }
 }

@@ -33,9 +33,9 @@ namespace MoneyTracker
     {
         static void Main(string[] args)
         {
+            LinkedList<Category> categories = new LinkedList<Category>();
 
-
-            while(true)
+            while (true)
             {
                 Console.WriteLine("=== ^v^// GoldenCeleng here for ur Money Tracker ^o^// ===\n");
                 Console.WriteLine("Menu List:\n");
@@ -43,26 +43,55 @@ namespace MoneyTracker
                 Console.WriteLine("2. View Category");
                 Console.WriteLine("3. Add Record");
                 Console.WriteLine("4. View Record");
+                Console.WriteLine("\nPlease input menu number! :v");
+                Console.WriteLine("Try inputting '1' for adding category :)");
 
-                Console.WriteLine("Please input menu number! :v");
-                Console.WriteLine("Try pressing '1' for adding category :)");
+                //var KeyInput = Console.ReadKey(true);
 
-                switch(Console.ReadLine())
+                switch (Console.ReadLine())
                 {
-                    case "1":
-                        Console.WriteLine("Adding Category...");
-                        // Logic to add category
+                    case "1": // Nambah Kategori
+                        Console.WriteLine("Please Enter Category Name..");
+                        string categoryName = Console.ReadLine()?.Trim();
+                        Category newCategory = new Category(categoryName);
+                        categories.AddLast(newCategory);
+                        Console.WriteLine($"\nCategory '{categoryName}' added successfully!");
+                        Console.WriteLine("Press any button to continue...");
+                        Console.ReadLine();
                         break;
-                    case "2":
-                        Console.WriteLine("Viewing Category...");
-                        // Logic to view category
+
+                    case "2": // liat kategori
+                        if (categories.Count == 0)
+                        {
+                            Console.WriteLine("No categories available.");
+                            Console.WriteLine("Press any button to continue...");
+                            Console.ReadLine();
+                            break;
+                        }
+
+                        Console.WriteLine("\nAvailable Categories:");
+                        foreach (var category in categories)
+                        {
+                            Console.WriteLine($"- {category.Name}");
+                        }
+
+                        Console.WriteLine("\nPress any button to continue...");
+                        Console.ReadLine();
                         break;
+
                     case "3":
                         Console.WriteLine("Adding Record...");
                         // Logic to add record
+
+                        Console.WriteLine("Press any button to continue...");
+                        Console.ReadLine();
                         break;
+
                     default:
-                        Console.WriteLine("ngetik yg bener lah..");
+                        Console.WriteLine("ngetik yg bener lah ngab :))..");
+
+                        Console.WriteLine("Press any button to continue...");
+                        Console.ReadLine();
                         break;
                 }
             }
