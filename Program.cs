@@ -50,7 +50,7 @@ namespace MoneyTracker
                 switch(Console.ReadLine())
                 {
                     case "1":
-                        Console.WriteLine("Adding Category...\n");
+                        Console.WriteLine("Adding Category...");
                         // Logic to add category
                         break;
                     case "2":
@@ -62,7 +62,7 @@ namespace MoneyTracker
                         // Logic to add record
                         break;
                     default:
-                        Console.WriteLine("Invalid option, please try again.");
+                        Console.WriteLine("ngetik yg bener lah..");
                         break;
                 }
             }
