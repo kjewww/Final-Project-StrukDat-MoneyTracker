@@ -30,15 +30,15 @@ namespace MoneyTracker
 
         public void Add(Category category)
         {
-        //    if (string.IsNullOrWhiteSpace(category.Name))
-        //        throw new ArgumentException("Category name cannot be empty.");
-        //    if (category.Name.Length > 20)
-        //        throw new ArgumentException("Category name must not exceed 20 characters.");
-        //    if (!Regex.IsMatch(category.Name, @"^[a-zA-Z\s]+$"))
-        //        throw new ArgumentException("Category name must contain only letters and spaces.");
+            //    if (string.IsNullOrWhiteSpace(category.Name))
+            //        throw new ArgumentException("Category name cannot be empty.");
+            //    if (category.Name.Length > 20)
+            //        throw new ArgumentException("Category name must not exceed 20 characters.");
+            //    if (!Regex.IsMatch(category.Name, @"^[a-zA-Z\s]+$"))
+            //        throw new ArgumentException("Category name must contain only letters and spaces.");
 
-        //    if (map.ContainsKey(category.Name))
-        //        throw new ArgumentException("Category already exists.");
+            //    if (map.ContainsKey(category.Name))
+            //        throw new ArgumentException("Category already exists.");
 
             // nambah ke linkedlist
             CNode newNode = new CNode(category);

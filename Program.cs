@@ -33,8 +33,8 @@ namespace MoneyTracker
     {
         static void Main(string[] args)
         {
-            CategoryList categoryList = new CategoryList();
-            //CategoryMap categoryList = new CategoryMap();
+            //CategoryList categoryList = new CategoryList();
+            CategoryMap categoryList = new CategoryMap();
 
             while (true)
             {
@@ -243,6 +243,7 @@ namespace MoneyTracker
                                 Console.WriteLine("Kategori tidak ditemukan, Coba lagi!");
                             }
                         }
+                        selectedCategoryDelete.DisplayRecords();
                         Console.WriteLine("Masukkan ID Record yang ingin dihapus:");
                         string inputRecordId = Console.ReadLine()?.Trim();
                         if (int.TryParse(inputRecordId, out int recordId))

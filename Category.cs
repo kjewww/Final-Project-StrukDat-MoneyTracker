@@ -20,20 +20,7 @@ namespace MoneyTracker
         public string Name
         {
             get { return _name; }
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value) || value.Length > 20 || !IsValidCategoryName(value))
-                {
-                    throw new ArgumentException("Invalid category name.");
-                }
-                _name = value;
-            }
-        }
-
-        private bool IsValidCategoryName(string name)
-        {
-            // Check if the name contains only letters and spaces
-            return name.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+            set { _name = value; }
         }
 
         public void AddRecord(Record record)
@@ -69,7 +56,7 @@ namespace MoneyTracker
                     {
                         previous.Next = current.Next;
                     }
-                    Console.WriteLine($"Record with ID {id} removed from category '{Name}'.");
+                    //Console.WriteLine($"Record with ID {id} removed from category '{Name}'.");
                     return;
                 }
                 previous = current;

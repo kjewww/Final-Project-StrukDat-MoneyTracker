@@ -32,8 +32,8 @@ namespace MoneyTracker
 
         public Category GetCategory(string name)
         {
-            if (!map.ContainsKey(name))
-                throw new ArgumentException("Category does not exist.");
+            //if (!map.ContainsKey(name))
+            //    throw new ArgumentException("Category does not exist.");
             return map.Get(name);
         }
 
@@ -44,7 +44,7 @@ namespace MoneyTracker
                 var entry = map.buckets[i];
                 while (entry != null)
                 {
-                    Console.WriteLine($"Category: {entry.Key}, Name: {entry.Value.Name}");
+                    Console.WriteLine($"- {entry.Value.Name}");
                     entry = entry.Next;
                 }
             }
