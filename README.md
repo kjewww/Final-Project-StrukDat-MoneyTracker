@@ -34,6 +34,7 @@ Jika kategori sudah ada, maka program akan menampilkan pesan error "Category alr
 ####	Penjelasan :
 Jika nama kategori tidak valid, maka program akan menampilkan pesan error "Invalid category name.".
 
+
 ### 2. Lihat Kategori
 #### 2.1 Tampilkan semua kategori yang sudah ada, diurutkan berdasarkan nama kategori (A-Z)
 ####	Penjelasan :
@@ -50,6 +51,7 @@ Jika berhasil menampilkan kategori, maka program akan menampilkan pesan sukses "
 #### 2.4 Tampilkan pesan error jika gagal menampilkan kategori
 #####	Penjelasan :
 Jika terjadi kesalahan saat menampilkan kategori, maka program akan menampilkan pesan error "Failed to display categories.".
+
 
 ### 3. Tambah Record (Harus ada kategori terlebih dahulu)
 #### 3.1 Pilih Kategori Record (pilih dari kategori yang sudah ada, tidak boleh kosong, harus valid)
@@ -79,6 +81,7 @@ Jika semua input valid, program akan membuat objek Record dengan kategori yang d
 #### 3.7 Tampilkan pesan sukses jika berhasil menambah record
 #####	Penjelasan :
 Jika record berhasil ditambahkan, maka program akan menampilkan pesan sukses "Record added successfully.".
+
 
 ### 4. Lihat Record - group by category (A-Z).
 #### 4.1 Tampilkan semua record yang ada, di Group by Kategori (A-Z)
