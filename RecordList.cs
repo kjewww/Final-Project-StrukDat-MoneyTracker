@@ -54,7 +54,7 @@ namespace MoneyTracker
             RNode current = head;
             while (current != null)
             {
-                Console.WriteLine($"- {current.Data.Title} on {current.Data.Date.ToShortDateString()} for {current.Data.Amount:C} in category {current.Data.Category.Name}");
+                Console.WriteLine($"- {current.Data.Title} | {current.Data.Date.ToShortDateString()} | {current.Data.Amount:C} | {current.Data.Category.Name} | {current.Data.Description}");
                 current = current.Next;
             }
         }

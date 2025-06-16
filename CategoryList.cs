@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MoneyTracker
@@ -20,6 +21,7 @@ namespace MoneyTracker
     public class CategoryList
     {
         public CNode head;
+        private HashMap map = new HashMap();
 
         public CategoryList()
         {
@@ -28,6 +30,17 @@ namespace MoneyTracker
 
         public void Add(Category category)
         {
+            if (string.IsNullOrWhiteSpace(category.Name))
+                throw new ArgumentException("Category name cannot be empty.");
+            if (category.Name.Length > 20)
+                throw new ArgumentException("Category name must not exceed 20 characters.");
+            if (!Regex.IsMatch(category.Name, @"^[a-zA-Z\s]+$"))
+                throw new ArgumentException("Category name must contain only letters and spaces.");
+
+            if (map.ContainsKey(category.Name))
+                throw new ArgumentException("Category already exists.");
+
+            // nambah ke linkedlist
             CNode newNode = new CNode(category);
             if (head == null)
             {
@@ -42,6 +55,9 @@ namespace MoneyTracker
                 }
                 current.Next = newNode;
             }
+
+            // nambah ke Hash
+            map.Add(category.Name, category);
         }
 
         public void DisplayCategories()
@@ -66,16 +82,7 @@ namespace MoneyTracker
 
         public Category GetCategory(string name)
         {
-            CNode current = head;
-            while (current != null)
-            {
-                if (current.Data.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
-                {
-                    return current.Data;
-                }
-                current = current.Next;
-            }
-            return null;
+            return map.Get(name);
         }
     }
 }

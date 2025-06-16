@@ -43,6 +43,7 @@ namespace MoneyTracker
                 Console.WriteLine("2. View Category");
                 Console.WriteLine("3. Add Record");
                 Console.WriteLine("4. View Record");
+                Console.WriteLine("0. Exit");
                 Console.WriteLine("\nPlease input menu number! :v");
                 Console.WriteLine("Try inputting '1' for adding category :)");
 
@@ -78,7 +79,7 @@ namespace MoneyTracker
                             Console.WriteLine($"Error: {ex.Message}");
                         }
 
-                        Console.WriteLine("Press any button to continue...");
+                        Console.WriteLine("Press Enter to continue...");
                         Console.ReadLine();
                         break;
 
@@ -86,7 +87,7 @@ namespace MoneyTracker
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("No categories available.");
-                            Console.WriteLine("Press any button to continue...");
+                            Console.WriteLine("Press Enter to continue...");
                             Console.ReadLine();
                             break;
                         }
@@ -94,7 +95,7 @@ namespace MoneyTracker
                         Console.WriteLine("\nAvailable Categories:");
                         categoryList.DisplayCategories();
 
-                        Console.WriteLine("\nPress any button to continue...");
+                        Console.WriteLine("\nPress Enter to continue...");
                         Console.ReadLine();
                         break;
 
@@ -121,7 +122,7 @@ namespace MoneyTracker
                     //Record newRecord = new Record(recordTitle, recordDate, recordAmount, Description, selectedCategory);
                     //selectedCategory.AddRecord(newRecord);
 
-                    //Console.WriteLine("Press any button to continue...");
+                    //Console.WriteLine("Press Enter to continue...");
                     //Console.ReadLine();
                     //break;
 
@@ -129,25 +130,41 @@ namespace MoneyTracker
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("No categories available. Please add a category first.");
-                            Console.WriteLine("Press any button to continue...");
+                            Console.WriteLine("Press Enter to continue...");
                             Console.ReadLine();
                             break;
                         }
 
-                        Console.WriteLine("Input Category name..");
                         Console.WriteLine("\nAvailable Categories:");
                         categoryList.DisplayCategories();
 
-                        string selectedCategoryName = Console.ReadLine()?.Trim();
-                        Category selectedCategory = categoryList.GetCategory(selectedCategoryName);
-
-                        if (selectedCategory == null)
+                        Category selectedCategory = null;
+                        while(selectedCategory == null)
                         {
-                            Console.WriteLine("Error: Category not found.");
-                            Console.WriteLine("Press any button to continue...");
-                            Console.ReadLine();
-                            break;
+                            Console.WriteLine("\nInput Category name..");
+                            string selectedCategoryName = Console.ReadLine()?.Trim();
+
+                            selectedCategory = categoryList.GetCategory(selectedCategoryName);
+                            if(selectedCategory == null)
+                            {
+                                Console.WriteLine("Category not found. Try again");
+                            }
                         }
+
+                        //if (selected_Category != null)
+                        //{
+
+                        //}
+
+                        //Category selectedCategory = categoryList.GetCategory(selectedCategoryName);
+
+                        //if (selectedCategory == null)
+                        //{
+                        //    Console.WriteLine("Error: Category not found.");
+                        //    Console.WriteLine("Press Enter to continue...");
+                        //    Console.ReadLine();
+                        //    break;
+                        //}
 
                         try
                         {
@@ -177,7 +194,7 @@ namespace MoneyTracker
                             Console.WriteLine($"Error: {ex.Message}");
                         }
 
-                        Console.WriteLine("Press any button to continue...");
+                        Console.WriteLine("Press Enter to continue...");
                         Console.ReadLine();
                         break;
 
@@ -186,54 +203,41 @@ namespace MoneyTracker
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("No categories available. Please add a category first.");
-                            Console.WriteLine("Press any button to continue...");
+                            Console.WriteLine("Press Enter to continue...");
                             Console.ReadLine();
                             break;
                         }
+                        
+                        Console.WriteLine("\nAvailable Categories:");
+                        categoryList.DisplayCategories();
 
-                        Console.WriteLine("1. View by Category (A-Z)");
-                        Console.WriteLine("2. View by Date (A-Z)");
-                        Console.WriteLine("3. View by Amount (Biggest to Lowest)");
-
-                        switch (Console.ReadLine())
+                        Category selectedCategoryView = null;
+                        while (selectedCategoryView == null)
                         {
-                            case "1": // By Category
+                            Console.WriteLine("\nPlease enter category name..");
+                            string inputCategory_View = Console.ReadLine()?.Trim();
 
-                                Console.WriteLine("\nAvailable Categories:");
-                                categoryList.DisplayCategories();
-
-                                Console.WriteLine("\nPlease Select Category..");
-                                string selectedCategoryView = Console.ReadLine()?.Trim();
-
-                                if (!categoryList.IsEmpty() && categoryList.GetCategory(selectedCategoryView) == null || string.IsNullOrEmpty(selectedCategoryView))
-                                {
-                                    Console.WriteLine("Error: Category not found.");
-                                    Console.WriteLine("Press any button to continue...");
-                                    Console.ReadLine();
-                                    break;
-                                }
-
-                                Category CategoryView = categoryList.GetCategory(selectedCategoryView);
-                                break;
-
-                            case "2":
-                                // Display records grouped by date
-                                break;
-
-                            case "3":
-                                // Display records sorted by amount
-                                break;
+                            selectedCategoryView = categoryList.GetCategory(inputCategory_View);
+                            if (selectedCategoryView == null)
+                            {
+                                Console.WriteLine("Category not found. please try again.");
+                            }
                         }
 
+                        selectedCategoryView.DisplayRecords();
 
-                        Console.WriteLine("\nPress any button to continue...");
+                        Console.WriteLine("\nPress Enter to continue...");
                         Console.ReadLine();
                         break;
+
+                    case "0": // Exit
+                        Console.WriteLine("Exiting the application. Goodbye!");
+                        return;
 
                     default:
                         Console.WriteLine("ngetik yg bener lah ngab :))..");
 
-                        Console.WriteLine("Press any button to continue...");
+                        Console.WriteLine("Press Enter to continue...");
                         Console.ReadLine();
                         break;
                 }

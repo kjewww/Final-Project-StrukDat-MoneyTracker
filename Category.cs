@@ -40,5 +40,11 @@ namespace MoneyTracker
         {
             recordList.Add(record);
         }
+
+        public void DisplayRecords()
+        {
+            Console.WriteLine($"Records for category '{Name}':");
+            recordList.DisplayRecords();
+        }
     }
 }
