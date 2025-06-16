@@ -46,5 +46,35 @@ namespace MoneyTracker
             Console.WriteLine($"Records for category '{Name}':");
             recordList.DisplayRecords();
         }
+
+        public void RemoveRecord(int id)
+        {
+            if (recordList.head == null)
+            {
+                Console.WriteLine("No records available to remove.");
+                return;
+            }
+
+            RNode current = recordList.head;
+            RNode previous = null;
+            while (current != null)
+            {
+                if (current.Data.id == id)
+                {
+                    if (previous == null) // Removing the head
+                    {
+                        recordList.head = current.Next;
+                    }
+                    else
+                    {
+                        previous.Next = current.Next;
+                    }
+                    Console.WriteLine($"Record with ID {id} removed from category '{Name}'.");
+                    return;
+                }
+                previous = current;
+                current = current.Next;
+            }
+        }
     }
 }

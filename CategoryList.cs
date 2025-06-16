@@ -30,15 +30,15 @@ namespace MoneyTracker
 
         public void Add(Category category)
         {
-            if (string.IsNullOrWhiteSpace(category.Name))
-                throw new ArgumentException("Category name cannot be empty.");
-            if (category.Name.Length > 20)
-                throw new ArgumentException("Category name must not exceed 20 characters.");
-            if (!Regex.IsMatch(category.Name, @"^[a-zA-Z\s]+$"))
-                throw new ArgumentException("Category name must contain only letters and spaces.");
+        //    if (string.IsNullOrWhiteSpace(category.Name))
+        //        throw new ArgumentException("Category name cannot be empty.");
+        //    if (category.Name.Length > 20)
+        //        throw new ArgumentException("Category name must not exceed 20 characters.");
+        //    if (!Regex.IsMatch(category.Name, @"^[a-zA-Z\s]+$"))
+        //        throw new ArgumentException("Category name must contain only letters and spaces.");
 
-            if (map.ContainsKey(category.Name))
-                throw new ArgumentException("Category already exists.");
+        //    if (map.ContainsKey(category.Name))
+        //        throw new ArgumentException("Category already exists.");
 
             // nambah ke linkedlist
             CNode newNode = new CNode(category);
@@ -83,6 +83,40 @@ namespace MoneyTracker
         public Category GetCategory(string name)
         {
             return map.Get(name);
+        }
+
+        public void RemoveCategory(string name)
+        {
+            if (IsEmpty())
+            {
+                Console.WriteLine("No categories available to remove.");
+                return;
+            }
+
+            // Remove from linked list
+            if (head.Data.Name == name)
+            {
+                head = head.Next;
+            }
+            else
+            {
+                CNode current = head;
+                while (current.Next != null && current.Next.Data.Name != name)
+                {
+                    current = current.Next;
+                }
+                if (current.Next != null)
+                {
+                    current.Next = current.Next.Next;
+                }
+                else
+                {
+                    Console.WriteLine($"Category '{name}' not found.");
+                    return;
+                }
+            }
+            // Remove from HashMap
+            map.Remove(name);
         }
     }
 }

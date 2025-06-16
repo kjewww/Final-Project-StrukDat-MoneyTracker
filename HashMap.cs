@@ -2,7 +2,7 @@
 
 public class HashMap
 {
-    private class Entry
+    public class Entry
     {
         public string Key;
         public Category Value;
@@ -16,15 +16,16 @@ public class HashMap
         }
     }
 
-    private Entry[] buckets;
-    private const int Size = 101; // Prime number for better distribution
+    public Entry[] buckets;
+    private const int Size = 101;
+    public int SIZE => buckets.Length; // Property to get the size of the HashMap
 
     public HashMap()
     {
         buckets = new Entry[Size];
     }
 
-    private int GetHash(string key)
+    private int GetHash(string key) // Hash Function
     {
         int hash = 0;
         foreach (char c in key.ToLower())
@@ -34,12 +35,12 @@ public class HashMap
         return hash;
     }
 
-    public bool ContainsKey(string key)
+    public bool ContainsKey(string key) // Mengecek apakah key ada di HashMap
     {
         return Get(key) != null;
     }
 
-    public Category Get(string key)
+    public Category Get(string key) // Mengambil value berdasarkan key
     {
         int index = GetHash(key);
         Entry current = buckets[index];
@@ -52,7 +53,7 @@ public class HashMap
         return null;
     }
 
-    public bool Add(string key, Category value)
+    public bool Add(string key, Category value) // Menambahkan key-value pair ke HashMap
     {
         int index = GetHash(key);
         Entry current = buckets[index];
@@ -67,5 +68,31 @@ public class HashMap
         newEntry.Next = buckets[index];
         buckets[index] = newEntry;
         return true;
+    }
+
+    public bool Remove(string key) // Menghapus key-value pair dari HashMap
+    {
+        int index = GetHash(key);
+        Entry current = buckets[index];
+        Entry previous = null;
+
+        while (current != null)
+        {
+            if (current.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
+            {
+                if (previous == null)
+                {
+                    buckets[index] = current.Next; // Remove head
+                }
+                else
+                {
+                    previous.Next = current.Next; // Bypass current
+                }
+                return true;
+            }
+            previous = current;
+            current = current.Next;
+        }
+        return false; // Not found
     }
 }

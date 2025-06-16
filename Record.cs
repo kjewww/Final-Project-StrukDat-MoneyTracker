@@ -8,6 +8,9 @@ namespace MoneyTracker
 {
     public class Record
     {
+        public static int idCounter = 1;
+
+        public int id { get; private set; }
         private string _title;
         private DateTime _date;
         private decimal _amount;
@@ -87,6 +90,7 @@ namespace MoneyTracker
 
         public Record(string title, DateTime date, decimal amount, string description, Category category)
         {
+            id = idCounter++ ;
             Title = title;
             Date = date;
             Amount = amount;

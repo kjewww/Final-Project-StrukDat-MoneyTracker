@@ -34,29 +34,26 @@ namespace MoneyTracker
         static void Main(string[] args)
         {
             CategoryList categoryList = new CategoryList();
+            //CategoryMap categoryList = new CategoryMap();
 
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("=== ^v^// GoldenCeleng here for ur Money Tracker ^o^// ===\n");
                 Console.WriteLine("Menu List:\n");
                 Console.WriteLine("1. Tambah Kategori");
                 Console.WriteLine("2. Lihat Katagori");
                 Console.WriteLine("3. Tambah Record");
                 Console.WriteLine("4. Lihat Record");
+                Console.WriteLine("5. Hapus Kategori");
+                Console.WriteLine("6. Hapus Record");
                 Console.WriteLine("0. Exit");
                 Console.WriteLine("\nMasukkan angka :v");
                 Console.WriteLine("Contoh Ketik '1' untuk Tambah Kategori :)");
 
-                //var KeyInput = Console.ReadKey(true);
-
                 switch (Console.ReadLine())
                 {
                     case "1": // Nambah Kategori
-                        //Console.WriteLine("Please Enter Category Name..");
-                        //string categoryName = Console.ReadLine()?.Trim();
-                        //Category newCategory = new Category(categoryName);
-                        //categoryList.Add(newCategory);
-                        //Console.WriteLine($"\nCategory '{categoryName}' added successfully!");
 
                         Console.WriteLine("Masukkan Nama Kategori! :D");
                         string categoryName = Console.ReadLine()?.Trim();
@@ -84,6 +81,7 @@ namespace MoneyTracker
                         break;
 
                     case "2": // liat kategori
+
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("Tidak ada kategori terdaftar");
@@ -100,6 +98,7 @@ namespace MoneyTracker
                         break;
 
                     case "3": // Add Record
+
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("Tidak ada kategori terdaftar. Tolong tambahkan satu!");
@@ -126,7 +125,7 @@ namespace MoneyTracker
 
                         try
                         {
-                            Console.WriteLine("Masukkan Judul Record (max 20 karakter, tanpa simbol):");
+                            Console.WriteLine("Masukkan Judul Record:");
                             string recordTitle = Console.ReadLine()?.Trim();
 
                             Console.WriteLine("Masukkan Jumlah dalam Rupiah:");
@@ -158,6 +157,7 @@ namespace MoneyTracker
 
 
                     case "4": // View Record
+
                         if (categoryList.IsEmpty())
                         {
                             Console.WriteLine("Tidak ada kategori terdaftar, Tolong tambahkan satu!");
@@ -188,7 +188,86 @@ namespace MoneyTracker
                         Console.ReadLine();
                         break;
 
+                    case "5": // Hapus Kategori
+
+                        if (categoryList.IsEmpty())
+                        {
+                            Console.WriteLine("Tidak ada kategori terdaftar, Tolong tambahkan satu!");
+                            Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                            Console.ReadLine();
+                            break;
+                        }
+                        Console.WriteLine("\nDaftar Kategori:");
+                        categoryList.DisplayCategories();
+                        Console.WriteLine("\nMasukkan nama kategori yang ingin dihapus:");
+                        string deleteCategoryName = Console.ReadLine()?.Trim();
+                        try
+                        {
+                            if (categoryList.GetCategory(deleteCategoryName) == null)
+                            {
+                                Console.WriteLine("Kategori tidak ditemukan :(");
+                            }
+                            else
+                            {
+                                categoryList.RemoveCategory(deleteCategoryName);
+                                Console.WriteLine($"Kategori '{deleteCategoryName}' berhasil dihapus :D");
+                            }
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Console.WriteLine($"Error: {ex.Message}");
+                        }
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                        Console.ReadLine();
+                        break;
+
+                    case "6": // Hapus Record by ID
+
+                        if (categoryList.IsEmpty())
+                        {
+                            Console.WriteLine("Tidak ada kategori terdaftar, Tolong tambahkan satu!");
+                            Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                            Console.ReadLine();
+                            break;
+                        }
+                        Console.WriteLine("\nDaftar Kategori:");
+                        categoryList.DisplayCategories();
+                        Category selectedCategoryDelete = null;
+                        while (selectedCategoryDelete == null)
+                        {
+                            Console.WriteLine("\nMasukkan nama kategori yang ingin dihapus recordnya:");
+                            string inputCategory_Delete = Console.ReadLine()?.Trim();
+                            selectedCategoryDelete = categoryList.GetCategory(inputCategory_Delete);
+                            if (selectedCategoryDelete == null)
+                            {
+                                Console.WriteLine("Kategori tidak ditemukan, Coba lagi!");
+                            }
+                        }
+                        Console.WriteLine("Masukkan ID Record yang ingin dihapus:");
+                        string inputRecordId = Console.ReadLine()?.Trim();
+                        if (int.TryParse(inputRecordId, out int recordId))
+                        {
+                            try
+                            {
+                                selectedCategoryDelete.RemoveRecord(recordId);
+                                Console.WriteLine($"Record dengan ID {recordId} berhasil dihapus :D");
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                Console.WriteLine($"Error: {ex.Message}");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID Record tidak valid!");
+                        }
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                        Console.ReadLine();
+                        break;
+
+
                     case "0": // Exit
+
                         Console.WriteLine("Bye Bye!!");
                         return;
 
