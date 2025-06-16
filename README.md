@@ -69,3 +69,11 @@ Jika record berhasil ditambahkan, maka program akan menampilkan pesan sukses "Re
 ### 4. Lihat Record - group by category (A-Z).
 #### 4.1 Tampilkan semua record yang ada, di Group by Kategori (A-Z)
 Program akan menampilkan semua record yang ada, dikelompokkan berdasarkan kategori. Kategori akan diurutkan dari A-Z. Setiap kategori akan menampilkan daftar record yang terkait dengan kategori tersebut.
+
+
+### 5. Hapus Category atau Record (Harus ada category atau record terlebih dahulu)
+#### 5.1 Hapus Record (pilih dari record yang sudah ada, tidak boleh kosong, harus valid)
+Program akan meminta user untuk memilih record yang ingin dihapus. Record yang dipilih harus valid, tidak boleh kosong, dan harus ada dalam daftar record yang sudah ditambahkan sebelumnya.
+
+#### 5.2 Hapus Category (pilih dari category yang sudah ada, tidak boleh kosong, harus valid)
+Program akan meminta user untuk memilih kategori yang ingin dihapus. Kategori yang dipilih harus valid, tidak boleh kosong, dan harus ada dalam daftar kategori yang sudah ditambahkan sebelumnya.Category yang dipilih akan dihapus beserta semua record yang terkait dengan kategori tersebut.
