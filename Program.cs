@@ -34,7 +34,8 @@ namespace MoneyTracker
         static void Main(string[] args)
         {
             //CategoryList categoryList = new CategoryList();
-            CategoryMap categoryList = new CategoryMap();
+            //CategoryMap categoryList = new CategoryMap();
+            CategoryMapp categoryList = new CategoryMapp();
 
             while (true)
             {
