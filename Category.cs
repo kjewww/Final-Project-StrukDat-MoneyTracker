@@ -9,12 +9,12 @@ namespace MoneyTracker
     public class Category
     {
         private string _name;
-        private LinkedList<Record> _records;
+        private RecordList recordList = new RecordList();
 
         public Category(string name)
         {
-            _name = name;
-            _records = new LinkedList<Record>();
+            Name = name;
+            recordList = new RecordList();
         }
 
         public string Name
@@ -38,7 +38,7 @@ namespace MoneyTracker
 
         public void AddRecord(Record record)
         {
-            _records.AddLast(record);
+            recordList.Add(record);
         }
     }
 }
