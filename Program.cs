@@ -39,13 +39,13 @@ namespace MoneyTracker
             {
                 Console.WriteLine("=== ^v^// GoldenCeleng here for ur Money Tracker ^o^// ===\n");
                 Console.WriteLine("Menu List:\n");
-                Console.WriteLine("1. Add Category");
-                Console.WriteLine("2. View Category");
-                Console.WriteLine("3. Add Record");
-                Console.WriteLine("4. View Record");
+                Console.WriteLine("1. Tambah Kategori");
+                Console.WriteLine("2. Lihat Katagori");
+                Console.WriteLine("3. Tambah Record");
+                Console.WriteLine("4. Lihat Record");
                 Console.WriteLine("0. Exit");
-                Console.WriteLine("\nPlease input menu number! :v");
-                Console.WriteLine("Try inputting '1' for adding category :)");
+                Console.WriteLine("\nMasukkan angka :v");
+                Console.WriteLine("Contoh Ketik '1' untuk Tambah Kategori :)");
 
                 //var KeyInput = Console.ReadKey(true);
 
@@ -58,20 +58,20 @@ namespace MoneyTracker
                         //categoryList.Add(newCategory);
                         //Console.WriteLine($"\nCategory '{categoryName}' added successfully!");
 
-                        Console.WriteLine("Please Enter Category Name..");
+                        Console.WriteLine("Masukkan Nama Kategori! :D");
                         string categoryName = Console.ReadLine()?.Trim();
 
                         try
                         {
                             if (categoryList.GetCategory(categoryName) != null)
                             {
-                                Console.WriteLine("Error: Category already exists!");
+                                Console.WriteLine("Kategori sudah terdaftar :))");
                             }
                             else
                             {
                                 Category newCategory = new Category(categoryName);
                                 categoryList.Add(newCategory);
-                                Console.WriteLine($"\nCategory '{categoryName}' added successfully!");
+                                Console.WriteLine($"\nKategori '{categoryName}' berhasil ditambahkan :D");
                             }
                         }
                         catch (ArgumentException ex)
@@ -79,122 +79,80 @@ namespace MoneyTracker
                             Console.WriteLine($"Error: {ex.Message}");
                         }
 
-                        Console.WriteLine("Press Enter to continue...");
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
                         Console.ReadLine();
                         break;
 
                     case "2": // liat kategori
                         if (categoryList.IsEmpty())
                         {
-                            Console.WriteLine("No categories available.");
-                            Console.WriteLine("Press Enter to continue...");
+                            Console.WriteLine("Tidak ada kategori terdaftar");
+                            Console.WriteLine("Tekan 'Enter' untuk lanjut");
                             Console.ReadLine();
                             break;
                         }
 
-                        Console.WriteLine("\nAvailable Categories:");
+                        Console.WriteLine("\nDaftar Kategori:");
                         categoryList.DisplayCategories();
 
-                        Console.WriteLine("\nPress Enter to continue...");
+                        Console.WriteLine("\nTekan 'Enter' untuk lanjut..");
                         Console.ReadLine();
                         break;
-
-                    //case "3":
-                    //Console.WriteLine("Input Category name..");
-                    //Console.WriteLine("\nAvailable Categories:");
-                    //categoryList.DisplayCategories();
-                    //string selectedCategoryName = Console.ReadLine()?.Trim();
-
-                    //Category selectedCategory = categoryList.GetCategory(selectedCategoryName);
-
-                    //Console.WriteLine("Input Record Name..");
-                    //string recordTitle = Console.ReadLine()?.Trim();
-
-                    //Console.WriteLine("Input Record Amount.. (decimal, not negative)");
-                    //string Amount = Console.ReadLine()?.Trim();
-                    //decimal recordAmount = decimal.Parse(Amount);
-
-                    //DateTime recordDate = DateTime.Now;
-
-                    //Console.WriteLine("Input Record Description..");
-                    //string Description = Console.ReadLine()?.Trim();
-
-                    //Record newRecord = new Record(recordTitle, recordDate, recordAmount, Description, selectedCategory);
-                    //selectedCategory.AddRecord(newRecord);
-
-                    //Console.WriteLine("Press Enter to continue...");
-                    //Console.ReadLine();
-                    //break;
 
                     case "3": // Add Record
                         if (categoryList.IsEmpty())
                         {
-                            Console.WriteLine("No categories available. Please add a category first.");
-                            Console.WriteLine("Press Enter to continue...");
+                            Console.WriteLine("Tidak ada kategori terdaftar. Tolong tambahkan satu!");
+                            Console.WriteLine("Tekan 'Enter' untuk lanjut..");
                             Console.ReadLine();
                             break;
                         }
 
-                        Console.WriteLine("\nAvailable Categories:");
+                        Console.WriteLine("\nDaftar Kategori:");
                         categoryList.DisplayCategories();
 
                         Category selectedCategory = null;
                         while(selectedCategory == null)
                         {
-                            Console.WriteLine("\nInput Category name..");
+                            Console.WriteLine("\nMasukkan nama kategori..");
                             string selectedCategoryName = Console.ReadLine()?.Trim();
 
                             selectedCategory = categoryList.GetCategory(selectedCategoryName);
                             if(selectedCategory == null)
                             {
-                                Console.WriteLine("Category not found. Try again");
+                                Console.WriteLine("Kategori tidak ditemukan. Coba lagi..");
                             }
                         }
 
-                        //if (selected_Category != null)
-                        //{
-
-                        //}
-
-                        //Category selectedCategory = categoryList.GetCategory(selectedCategoryName);
-
-                        //if (selectedCategory == null)
-                        //{
-                        //    Console.WriteLine("Error: Category not found.");
-                        //    Console.WriteLine("Press Enter to continue...");
-                        //    Console.ReadLine();
-                        //    break;
-                        //}
-
                         try
                         {
-                            Console.WriteLine("Input Record Title (max 20 char, no symbol):");
+                            Console.WriteLine("Masukkan Judul Record (max 20 karakter, tanpa simbol):");
                             string recordTitle = Console.ReadLine()?.Trim();
 
-                            Console.WriteLine("Input Record Amount (decimal, not negative):");
+                            Console.WriteLine("Masukkan Jumlah dalam Rupiah:");
                             string amountInput = Console.ReadLine()?.Trim();
                             if (!decimal.TryParse(amountInput, out decimal recordAmount))
                             {
-                                Console.WriteLine("Error: Invalid amount format.");
+                                Console.WriteLine("Jumlah Invalid!");
                                 break;
                             }
 
                             DateTime recordDate = DateTime.Now;
 
-                            Console.WriteLine("Input Record Description (max 50 char):");
+                            Console.WriteLine("Masukkan Deskripsi:"); // max 50 karakter
                             string description = Console.ReadLine()?.Trim();
 
                             Record newRecord = new Record(recordTitle, recordDate, recordAmount, description, selectedCategory);
                             selectedCategory.AddRecord(newRecord);
 
-                            Console.WriteLine("Record successfully added!");
+                            Console.WriteLine("Record berhasil ditambahkan :D");
                         }
                         catch (ArgumentException ex)
                         {
                             Console.WriteLine($"Error: {ex.Message}");
                         }
 
-                        Console.WriteLine("Press Enter to continue...");
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
                         Console.ReadLine();
                         break;
 
@@ -202,13 +160,13 @@ namespace MoneyTracker
                     case "4": // View Record
                         if (categoryList.IsEmpty())
                         {
-                            Console.WriteLine("No categories available. Please add a category first.");
-                            Console.WriteLine("Press Enter to continue...");
+                            Console.WriteLine("Tidak ada kategori terdaftar, Tolong tambahkan satu!");
+                            Console.WriteLine("Tekan 'Enter' untuk lanjut..");
                             Console.ReadLine();
                             break;
                         }
                         
-                        Console.WriteLine("\nAvailable Categories:");
+                        Console.WriteLine("\nDaftar Kategori:");
                         categoryList.DisplayCategories();
 
                         Category selectedCategoryView = null;
@@ -220,18 +178,18 @@ namespace MoneyTracker
                             selectedCategoryView = categoryList.GetCategory(inputCategory_View);
                             if (selectedCategoryView == null)
                             {
-                                Console.WriteLine("Category not found. please try again.");
+                                Console.WriteLine("Kategori tidak ditemukan, Coba lagi!");
                             }
                         }
 
                         selectedCategoryView.DisplayRecords();
 
-                        Console.WriteLine("\nPress Enter to continue...");
+                        Console.WriteLine("\nTekan 'Enter' untuk lanjut..");
                         Console.ReadLine();
                         break;
 
                     case "0": // Exit
-                        Console.WriteLine("Exiting the application. Goodbye!");
+                        Console.WriteLine("Bye Bye!!");
                         return;
 
                     default:
