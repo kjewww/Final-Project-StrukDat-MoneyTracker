@@ -78,7 +78,12 @@ Program akan menampilkan semua record yang ada, dikelompokkan berdasarkan katego
 
 ### 5. Hapus Category atau Record (Harus ada category atau record terlebih dahulu)
 #### 5.1 Hapus Record (pilih dari record yang sudah ada, tidak boleh kosong, harus valid)
-Program akan meminta user untuk memilih record yang ingin dihapus. Record yang dipilih harus valid, tidak boleh kosong, dan harus ada dalam daftar record yang sudah ditambahkan sebelumnya.
+Program akan meminta user untuk memilih record yang ingin dihapus. Record yang dipilih harus valid, tidak boleh kosong, dan harus ada dalam daftar record yang sudah ditambahkan sebelumnya.Maka saldo akan ditambah sesuai dengan jumlah record yang dihapus. Record yang dipilih akan dihapus dari RecordList.
 
 #### 5.2 Hapus Category (pilih dari category yang sudah ada, tidak boleh kosong, harus valid)
 Program akan meminta user untuk memilih kategori yang ingin dihapus. Kategori yang dipilih harus valid, tidak boleh kosong, dan harus ada dalam daftar kategori yang sudah ditambahkan sebelumnya.Category yang dipilih akan dihapus beserta semua record yang terkait dengan kategori tersebut.
+maka saldo akan ditambah sesuai dengan jumlah record yang dihapus. Kategori yang dipilih akan dihapus dari CategoryList.
+
+### 6. Tambah Saldo
+program akan meminta user untuk memasukkan jumlah saldo yang ingin ditambahkan. Jumlah saldo harus berupa angka desimal, tidak boleh kosong, harus valid, dan tidak boleh negatif. Jika jumlah saldo tidak valid, program akan menampilkan pesan error.
+
