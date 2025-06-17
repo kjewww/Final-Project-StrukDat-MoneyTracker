@@ -36,6 +36,8 @@ namespace MoneyTracker
             //CategoryList categoryList = new CategoryList();
             //CategoryMap categoryList = new CategoryMap();
             CategoryMapp categoryList = new CategoryMapp();
+            Category KategoriPemasukan = new("Pemasukan");
+            categoryList.AddCategory("Pemasukan", KategoriPemasukan);
 
             while (true)
             {
@@ -48,6 +50,8 @@ namespace MoneyTracker
                 Console.WriteLine("4. Lihat Record");
                 Console.WriteLine("5. Hapus Kategori");
                 Console.WriteLine("6. Hapus Record");
+                Console.WriteLine("7. Tambah Saldo");
+                Console.WriteLine("8. Cek Saldo");
                 Console.WriteLine("0. Exit");
                 Console.WriteLine("\nMasukkan angka :v");
                 Console.WriteLine("Contoh Ketik '1' untuk Tambah Kategori :)");
@@ -142,8 +146,11 @@ namespace MoneyTracker
                             Console.WriteLine("Masukkan Deskripsi:"); // max 50 karakter
                             string description = Console.ReadLine()?.Trim();
 
-                            Record newRecord = new Record(recordTitle, recordDate, recordAmount, description, selectedCategory);
+                            bool isPemasukan = false;
+
+                            Record newRecord = new Record(recordTitle, recordDate, recordAmount, description, selectedCategory, isPemasukan);
                             selectedCategory.AddRecord(newRecord);
+                            Account.Withdraw(recordAmount);
 
                             Console.WriteLine("Record berhasil ditambahkan :D");
                         }
@@ -210,6 +217,8 @@ namespace MoneyTracker
                             }
                             else
                             {
+                                Category selectedCategory_Delete = categoryList.GetCategory(deleteCategoryName);
+                                Account.AddSaldo(selectedCategory_Delete.GetAmount());
                                 categoryList.RemoveCategory(deleteCategoryName);
                                 Console.WriteLine($"Kategori '{deleteCategoryName}' berhasil dihapus :D");
                             }
@@ -231,6 +240,7 @@ namespace MoneyTracker
                             Console.ReadLine();
                             break;
                         }
+
                         Console.WriteLine("\nDaftar Kategori:");
                         categoryList.DisplayCategories();
                         Category selectedCategoryDelete = null;
@@ -263,6 +273,42 @@ namespace MoneyTracker
                         {
                             Console.WriteLine("ID Record tidak valid!");
                         }
+
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                        Console.ReadLine();
+                        break;
+
+                    case "7": // Tambah Saldo
+
+                        Console.WriteLine("Silakan Masukkan Jumlah Saldo..");
+                        string InputSaldo = Console.ReadLine()?.Trim();
+                        decimal AmountSaldo = decimal.Parse(InputSaldo);
+
+                        Console.WriteLine("Masukkan Judul..");
+                        string InputJudul = Console.ReadLine()?.Trim();
+
+                        DateTime PemasukanDate = DateTime.Now;
+
+                        Console.WriteLine("Masukkan Deskripsi..");
+                        string InputDeskripsi = Console.ReadLine()?.Trim();
+
+                        bool IsPemasukan = true;
+
+                        Record newPemasukan = new(InputJudul, PemasukanDate, AmountSaldo, InputDeskripsi, KategoriPemasukan, IsPemasukan);
+                        KategoriPemasukan.AddRecord(newPemasukan);
+
+                        Account.AddSaldo(AmountSaldo);
+
+                        Console.WriteLine("Pemasukan berhasil ditambahkan :D");
+
+                        Console.WriteLine("Tekan 'Enter' untuk lanjut..");
+                        Console.ReadLine();
+
+                        break;
+
+                    case "8": // Lihat Saldo
+
+                        Console.WriteLine($"Saldo saat ini: {Account.Saldo}");
                         Console.WriteLine("Tekan 'Enter' untuk lanjut..");
                         Console.ReadLine();
                         break;

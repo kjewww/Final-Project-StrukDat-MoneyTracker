@@ -11,6 +11,7 @@ namespace MoneyTracker
         public static int idCounter = 1;
 
         public int id { get; private set; }
+        public bool IsPemasukan { get; private set; } // pemasukan/pengeluaran
         private string _title;
         private DateTime _date;
         private decimal _amount;
@@ -88,9 +89,10 @@ namespace MoneyTracker
             return title.All(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c));
         }
 
-        public Record(string title, DateTime date, decimal amount, string description, Category category)
+        public Record(string title, DateTime date, decimal amount, string description, Category category, bool isPemasukan)
         {
             id = idCounter++ ;
+            IsPemasukan = isPemasukan;
             Title = title;
             Date = date;
             Amount = amount;

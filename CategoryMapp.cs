@@ -2,13 +2,13 @@
 
 public class CategoryMapp
 {
-    public class Entry
+    public class Node
     {
         public string Key;
         public Category Value;
-        public Entry Next;
+        public Node Next;
 
-        public Entry(string key, Category value)
+        public Node(string key, Category value)
         {
             Key = key;
             Value = value;
@@ -16,13 +16,13 @@ public class CategoryMapp
         }
     }
 
-    public Entry[] buckets;
+    public Node[] buckets;
     private const int Size = 101;
     public int SIZE => buckets.Length; // Property to get the size of the HashMap
 
     public CategoryMapp()
     {
-        buckets = new Entry[Size];
+        buckets = new Node[Size];
     }
 
     private int GetHash(string key) // Hash Function
@@ -43,7 +43,7 @@ public class CategoryMapp
     public Category GetCategory(string key) // Mengambil value berdasarkan key
     {
         int index = GetHash(key);
-        Entry current = buckets[index];
+        Node current = buckets[index];
         while (current != null)
         {
             if (current.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
@@ -54,11 +54,9 @@ public class CategoryMapp
     }
 
     public bool AddCategory(string key, Category value) // Menambahkan key-value pair ke HashMap
-    {
-        
-
+    {   
         int index = GetHash(key);
-        Entry current = buckets[index];
+        Node current = buckets[index];
         while (current != null)
         {
             if (current.Key.Equals(key, StringComparison.OrdinalIgnoreCase))
@@ -66,9 +64,9 @@ public class CategoryMapp
             current = current.Next;
         }
 
-        Entry newEntry = new Entry(key, value);
-        newEntry.Next = buckets[index];
-        buckets[index] = newEntry;
+        Node newNode = new Node(key, value);
+        newNode.Next = buckets[index];
+        buckets[index] = newNode;
         return true;
     }
 
@@ -91,8 +89,8 @@ public class CategoryMapp
         if (!ContainsKey(key)) return false;
 
         int index = GetHash(key);
-        Entry current = buckets[index];
-        Entry previous = null;
+        Node current = buckets[index];
+        Node previous = null;
 
         while (current != null)
         {
@@ -117,8 +115,8 @@ public class CategoryMapp
     public void RemoveCategory(string category)
     {
         int index = GetHash(category);
-        Entry current = buckets[index];
-        Entry previous = null;
+        Node current = buckets[index];
+        Node previous = null;
         while (current != null)
         {
             if(current.Key.Equals(category, StringComparison.OrdinalIgnoreCase))
@@ -141,11 +139,11 @@ public class CategoryMapp
     {
         for (int i = 0; i < Size; i++)
         {
-            var entry = buckets[i];
-            while (entry != null)
+            var Node = buckets[i];
+            while (Node != null)
             {
-                Console.WriteLine($"- {entry.Value.Name}");
-                entry = entry.Next;
+                Console.WriteLine($"- {Node.Value.Name}");
+                Node = Node.Next;
             }
         }
     }

@@ -8,6 +8,7 @@ namespace MoneyTracker
 {
     public class Category
     {
+        private decimal TotalAmount { get; set; }
         private string _name;
         private RecordList recordList = new RecordList();
 
@@ -26,6 +27,7 @@ namespace MoneyTracker
         public void AddRecord(Record record)
         {
             recordList.Add(record);
+            TotalAmount += record.Amount;
         }
 
         public void DisplayRecords()
@@ -48,7 +50,7 @@ namespace MoneyTracker
             {
                 if (current.Data.id == id)
                 {
-                    if (previous == null) // Removing the head
+                    if (previous == null)
                     {
                         recordList.head = current.Next;
                     }
@@ -56,12 +58,20 @@ namespace MoneyTracker
                     {
                         previous.Next = current.Next;
                     }
-                    //Console.WriteLine($"Record with ID {id} removed from category '{Name}'.");
+                    Account.AddSaldo(current.Data.Amount);
+                    TotalAmount -= current.Data.Amount;
                     return;
                 }
+
                 previous = current;
                 current = current.Next;
             }
+
+        }
+
+        public decimal GetAmount()
+        {
+            return TotalAmount;
         }
     }
 }
