@@ -1,4 +1,9 @@
 # MoneyTracker
+
+## Kelompok :
+1. Ahmad Habibie Dewa Pratama (5053241019)
+2. Muhammad Zaki Alfikri (5053241034)
+
 ## Class yang digunakan
 - 'Category' : Kelas ini memiliki atribut nama kategori dan listrecord yang berisi daftar pengeluaran atau pemasukan.
 - 'Record' : Kelas ini memiliki atribut tanggal, jumlah, dan deskripsi dari pengeluaran atau pemasukan.
