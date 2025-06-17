@@ -20,6 +20,7 @@ namespace MoneyTracker
                 throw new ArgumentException("Category name must contain only letters and spaces.");
             if (map.ContainsKey(category.Name))
                 throw new ArgumentException("Category already exists.");
+
             map.Add(category.Name, category);
         }
 
